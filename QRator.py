@@ -15,12 +15,12 @@ from PIL import ImageTk,Image
 
 @app.route('/')
 def index():
-   return render_template('meowscan.html')
+   return render_template('index.html')
 
 
 @app.route('/home')
 def home():
-   return render_template('meowscan.html')
+   return render_template('iindex.html')
 
 
 
@@ -79,7 +79,7 @@ def camqr():
 ##      messagebox.showerror('ERROR','Sorry the given image had no QR, Please retry with another QR code')
 ##      cv2.destroyAllWindows()
    # meow.mainloop()
-    return  render_template('meowscan.html')
+    return  render_template('index.html')
 
 
 
@@ -121,7 +121,7 @@ def imgqr():
        messagebox.showerror('ERROR',' Please  enter an image with QR code')
        goo.after(200,goo.destroy())
        goo.mainloop()
-    return  render_template('meowscan.html')
+    return  render_template('index.html')
 
 
 
