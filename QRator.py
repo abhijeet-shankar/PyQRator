@@ -48,6 +48,7 @@ def read_barcodes(frame,str1):
 @app.route('/camqr',methods=["POST","GET"])
 def camqr():
     meow=Tk()
+    meow.attributes("-topmost", True)
     messagebox.showinfo('NOTE','IF THE QR TAKES TOO LONG TO SEARCH, KINDLY CHECK YOUR QR CODE AND PRESS SPACE TO EXIT')
     meow.destroy()
     meow.mainloop()
