@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_file
 app = Flask(__name__, template_folder='meow')
 
 from tkinter import *
@@ -9,7 +9,12 @@ import sys
 from pyzbar import pyzbar
 import webbrowser
 from PIL import ImageTk,Image
+import qrcode 
 
+
+
+global basewidth
+basewidth=100
 
 
 
@@ -17,14 +22,9 @@ from PIL import ImageTk,Image
 def index():
    return render_template('index.html')
 
-
 @app.route('/home')
 def home():
-   return render_template('iindex.html')
-
-
-
-
+   return render_template('index.html')
 
 
 def read_barcodes(frame,str1):
@@ -39,10 +39,6 @@ def read_barcodes(frame,str1):
                cv2.putText(frame, barcode_info, (x + 3, y - 1), font, 1.0, (255, 255, 255), 1)   
    return frame,str1
  
-
-
-
-
 
 
 @app.route('/camqr',methods=["POST","GET"])
@@ -80,8 +76,6 @@ def camqr():
 ##      cv2.destroyAllWindows()
    # meow.mainloop()
     return  render_template('index.html')
-
-
 
 
 
@@ -123,9 +117,55 @@ def imgqr():
        goo.mainloop()
     return  render_template('index.html')
 
+@app.route('/generate_qr')
+def generate_qr():
+   return render_template("qr.html")
+
+@app.route('/generate_qr_code', methods=['POST'])
+def generate_qr_code():
+    # Get the text to encode from the form data
+    text_to_encode = request.form['text_to_encode']
+    color=request.form['color-picker']
+    QRcode = qrcode.QRCode(
+    error_correction=qrcode.constants.ERROR_CORRECT_H)
+    QRcode.add_data(text_to_encode)
+    QRcode.make()
+    QRimg = QRcode.make_image(
+        fill_color=color, back_color="white").convert('RGB')
+
+    img= request.files['image']
+    # Save the image to a temporary file
+    #temp_file = 'temp_image.jpg'    
+
+
+    if (img):
+        logo = Image.open(img)
+        # adjust image size
+        wpercent = (basewidth/float(logo.size[0]))
+        hsize = int((float(logo.size[1])*float(wpercent)))
+        logo = logo.resize((basewidth, hsize), Image.ANTIALIAS)
+        pos = ((QRimg.size[0] - logo.size[0]) // 2,(QRimg.size[1] - logo.size[1]) // 2)
+        QRimg.paste(logo, pos)
+            # Save the image to a temporary file
+        temp_file = 'temp_qr_code.png'
+        QRimg.save(temp_file)
+        return send_file(temp_file, mimetype='image/png', as_attachment=True)
+    else:
+        # Save the image to a temporary file
+        temp_file = 'temp_qr_code.png'
+        QRimg.save(temp_file)
+        return send_file(temp_file, mimetype='image/png', as_attachment=True)
+    # Return the image file to the user
+    return  render_template('qr.html')
+
+
+
+
+
+
 
 
 
 
 if __name__ == '__main__':
-   app.run(debug=True,port=6969)
+   app.run(debug=True,port=8080)
