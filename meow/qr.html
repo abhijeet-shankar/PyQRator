@@ -8,7 +8,7 @@
  
     <form method="POST" action="{{ url_for('generate_qr_code') }}" enctype="multipart/form-data">
       <label for="text_to_encode">Text to encode:</label>
-      <input type="text" name="text_to_encode" id="text_to_encode">
+      <input type="text" name="text_to_encode" id="text_to_encode" placeholder="Type Here...">
 
       <br>
       
@@ -98,7 +98,7 @@
 
 
     select {
-    border-radius: 20px;
+    border-radius: 10px;
     border-style: solid;
     position: relative;
     display: inline-flex;
@@ -115,10 +115,9 @@
 
 
      select:hover {
-        background: #c4e34b;
+        
         color: #6b057d;
-        box-shadow: 0 0 5px  #c4e34b, 0 0 25px  #c4e34b, 0 0 50px  #c4e34b, 0 0 200px  #c4e34b;
-        -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+        
       }
 
 
@@ -131,7 +130,11 @@
         color: #a632b5;
         text-shadow: 0 0 5px #cfdd35d3, 0 0 15px #cfdd35d3, 0 0 20px#cfdd35d3, 0 0 40px #cfdd35d3, 0 0 60px #cfdd35d3, 0 0 10px #cfdd35d3, 0 0 88px#cfdd35d3;
       }
-
+      option:hover{        background: #03e9f4;
+        color: #050801;
+        box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 200px #03e9f4;
+        -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+      }
 
 
 
@@ -153,6 +156,12 @@
     filter: hue-rotate(150deg);
     }
 
+    input[type="text"] {
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        padding: 8px 12px;
+        font-size: 16px;
+      }
 
      input:hover {
         background: #03e9f4;
