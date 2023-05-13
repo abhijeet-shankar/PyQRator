@@ -6,12 +6,8 @@
   <body>
     <h1>QR Code Generator</h1>
 
-    <form
-      method="POST"
-      action="{{ url_for('generate_qr_code') }}"
-      enctype="multipart/form-data"
-    >
-      <label for="text_to_encode">Text to encode:</label>
+    <form method="POST" action="{{ url_for('generate_qr_code') }}" enctype="multipart/form-data">
+      <label for="text_to_encode">Text to encode(in QR):</label>
       <input
         type="text"
         name="text_to_encode"
@@ -152,13 +148,13 @@
       }
 
       input[type="text"] {
-        border: 2px solid #ccc;
-        border-radius: 4px;
-        padding: 8px 12px;
-        font-size: 16px;
-        width: 800px;
-        height: 40px;
-        left: 75px;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          padding: 8px 12px;
+          font-size: 16px;
+          width: 800px;
+          height: 40px;
+          left: 8px;
       }
       input[type="file"] {
         border: 2px solid #000000;
