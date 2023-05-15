@@ -1,12 +1,17 @@
 import qrcode
-from PIL import ImageTk, Image
+from tkinter import filedialog
+from tkinter import messagebox
+from tkinter import *
+from PIL import ImageTk
+try:
+    from PIL import Image
+except ImportError:
+    import Image
 import webbrowser
 from pyzbar import pyzbar
 import sys
 import cv2
-from tkinter import filedialog
-from tkinter import messagebox
-from tkinter import *
+
 from flask import Flask, jsonify, render_template, request, send_file
 app = Flask(__name__, template_folder='meow')
 
@@ -124,7 +129,6 @@ def generate_qr():
 
 @app.route('/generate_qr_code', methods=['POST'])
 def generate_qr_code():
-    # Get the text to encode from the form data
     text_to_encode = request.form['text_to_encode']
     color = request.form['color-picker']
     QRcode = qrcode.QRCode(
@@ -135,8 +139,6 @@ def generate_qr_code():
         fill_color=color, back_color="white").convert('RGB')
 
     img = request.files['image']
-    # Save the image to a temporary file
-    # temp_file = 'temp_image.jpg'
 
     if (img):
         logo = Image.open(img)
@@ -156,7 +158,7 @@ def generate_qr_code():
         temp_file = 'temp_qr_code.png'
         QRimg.save(temp_file)
         return send_file(temp_file, mimetype='image/png', as_attachment=True)
-    # Return the image file to the user
+
     return render_template('qr.html')
 
 
