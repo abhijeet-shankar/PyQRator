@@ -57,7 +57,7 @@ Choose the file location where you want to save the generated file and provide a
 
 ## License
 
-PyQRator is licensed under MIT licene. Click [MIT](https://choosealicense.com/licenses/mit/) for more information.
+PyQRator is licensed under MIT license. Click [MIT](https://choosealicense.com/licenses/mit/) for more information.
 
 
 ## Contributing
