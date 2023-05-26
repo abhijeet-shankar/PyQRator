@@ -1,6 +1,6 @@
 # PyQRator
 
-PyQRator is a Python project that provides functionalities to scan and generate QR codes. It can scan QR codes using images or the camera of a device, and can generate QR codes with or without images in the center of the code. The frontend of the project is based on Flask, while the Pyzbar and qrcode libraries are used for QR code applications.
+PyQRator is a Python project that provides functionalities to scan and generate QR codes. It can scan QR codes using images or the camera of a device, and can generate QR codes with or without images in the center of the code. The frontend of the project is a web-based application by using the generating capabilities of Flask's web framework, while the Pyzbar and qrcode libraries are used for QR code applications.
 
 
 ## Run Locally
